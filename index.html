@@ -21,44 +21,7 @@
   <button onclick="addBook()">Add</button>
 
   <script src="index.js">
-    const bookList = document.getElementById('book-list');
-
-    function fetchBooks() {
-      fetch('/books')
-        .then(res => res.json())
-        .then(data => {
-          bookList.innerHTML = '';
-          data.forEach(book => {
-            const li = document.createElement('li');
-            li.textContent = `${book.title} by ${book.author} `;
-            const del = document.createElement('button');
-            del.textContent = "Delete";
-            del.onclick = () => deleteBook(book.id);
-            li.appendChild(del);
-            bookList.appendChild(li);
-          });
-        });
-    }
-
-    function addBook() {
-      const title = document.getElementById('title').value;
-      const author = document.getElementById('author').value;
-      fetch('/books', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, author })
-      }).then(() => {
-        document.getElementById('title').value = '';
-        document.getElementById('author').value = '';
-        fetchBooks();
-      });
-    }
-
-    function deleteBook(id) {
-      fetch(`/books/${id}`, { method: 'DELETE' }).then(() => fetchBooks());
-    }
-
-    fetchBooks();
+    
   </script>
 </body>
 </html>
